@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"context"
-	api "github.com/thienma1258/backend-web-api-template"
+	api "github.com/thienma1258/backend-web-api"
 	"log"
 )
 

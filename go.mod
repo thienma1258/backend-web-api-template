@@ -1,4 +1,4 @@
-module github.com/thienma1258/backend-web-api-template
+module github.com/thienma1258/backend-web-api
 
 go 1.17
 
