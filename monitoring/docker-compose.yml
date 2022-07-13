@@ -21,7 +21,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./conf.d/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf.d/nginx/:/etc/nginx/
     labels:
       com.datadoghq.ad.check_names: '["nginx"]'
       com.datadoghq.ad.init_configs: '[{}]'
