@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  datadog:
+    container_name: datadog_agent
+    image: datadog/agent:latest
+    env_file:
+      - apikey.env
+    environment:
+      - DD_HOSTNAME=datadog
+      - DD_APM_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+    volumes:
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/passwd:/etc/passwd:ro
+
+  nginx:
+    image: "nginx:latest"
+    container_name: docker-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./conf.d/nginx/:/etc/nginx/conf.d
+    labels:
+      com.datadoghq.ad.check_names: '["nginx"]'
+      com.datadoghq.ad.init_configs: '[{}]'
+      com.datadoghq.ad.instances: '[{"nginx_status_url": "http://%%host%%:%%port%%/nginx_status"}]'
